@@ -27,11 +27,10 @@ jobs:
           repository: 'su-san1129/s3si'
           path: s3si
 
-      - name: Generate config.txt
+      - name: Generate profile.json
         working-directory: s3si
         run: |
-          echo '{ "cacheDir": "./cache", "fGen": "https://api.imink.app/f", "fileExportPath": "./export", "monitorInterval": 500, "statInkApiKey": "${{ env.STAT_INK_API_KEY }}", "userLang": "ja-JP", "userCountry": "JP", "loginState": { "sessionToken": "${{  env.SESSION_TOKEN }}", "gToken": "${{ env.G_TOKEN }}", "bulletToken": "${{ env.BULLET_TOKEN }}" } }' > config.txt
-          cat config.txt
+          echo '{ "cacheDir": "./cache", "fGen": "https://api.imink.app/f", "fileExportPath": "./export", "monitorInterval": 500, "statInkApiKey": "${{ env.STAT_INK_API_KEY }}", "userLang": "ja-JP", "userCountry": "JP", "loginState": { "sessionToken": "${{  env.SESSION_TOKEN }}", "gToken": "${{ env.G_TOKEN }}", "bulletToken": "${{ env.BULLET_TOKEN }}" } }' > profile.json
       - name: Run s3si
         working-directory: s3si
         run: |
