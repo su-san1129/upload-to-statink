@@ -1,4 +1,4 @@
-name: Splatoon3 Battlelog Uplorder
+name: Splatoon3 Battle log Uplorder
 
 on:
   schedule:
@@ -11,8 +11,8 @@ jobs:
     env:
       STAT_INK_API_KEY: ${{ secrets.STAT_INK_API_KEY }}
       SESSION_TOKEN: ${{ secrets.SESSION_TOKEN }}
-      G_TOKEN: ${{ secrets.GTOKEN }}
-      BULLET_TOKEN: ${{ secrets.BULLETTOKEN }}
+      G_TOKEN: ${{ secrets.G_TOKEN }}
+      BULLET_TOKEN: ${{ secrets.BULLET_TOKEN }}
 
     name: Splatoon3 Battlelog Uploader
     steps:
