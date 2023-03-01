@@ -1,0 +1,38 @@
+name: Splatoon3 Battlelog Uplorder
+
+on:
+  schedule:
+    - cron: '0 0-23/2 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      STAT_INK_API_KEY: ${{ secrets.STAT_INK_API_KEY }}
+      SESSION_TOKEN: ${{ secrets.SESSION_TOKEN }}
+      G_TOKEN: ${{ secrets.GTOKEN }}
+      BULLET_TOKEN: ${{ secrets.BULLETTOKEN }}
+
+    name: Splatoon3 Battlelog Uploader
+    steps:
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Checkout s3si
+        uses: actions/checkout@v3
+        with:
+          repository: 'su-san1129/s3si'
+          path: s3si
+
+      - name: Generate config.txt
+        working-directory: s3si
+        run: |
+          echo '{ "cacheDir": "./cache", "fGen": "https://api.imink.app/f", "fileExportPath": "./export", "monitorInterval": 500, "statInkApiKey": "${{ env.STAT_INK_API_KEY }}", "userLang": "ja-JP", "userCountry": "JP", "loginState": { "sessionToken": "${{  env.SESSION_TOKEN }}", "gToken": "${{ env.G_TOKEN }}", "bulletToken": "${{ env.BULLET_TOKEN }}" } }' > config.txt
+          cat config.txt
+      - name: Run s3si
+        working-directory: s3si
+        run: |
+          deno run -Ar s3si.ts
