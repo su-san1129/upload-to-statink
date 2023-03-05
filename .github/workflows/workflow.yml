@@ -24,7 +24,7 @@ jobs:
       - name: Checkout s3si
         uses: actions/checkout@v3
         with:
-          repository: 'su-san1129/s3si.ts'
+          repository: 'spacemeowx2/s3si.ts'
           path: s3si
 
       - name: Generate profile.json
